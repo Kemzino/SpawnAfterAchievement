@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "net.dovolor.saa.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"AdvancementTrackerMixin",
+		"PlayerAdvancementTrackerAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
