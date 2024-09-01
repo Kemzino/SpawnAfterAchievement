@@ -15,7 +15,7 @@ public class AchivementManager {
         ServerPlayerEntity player = ((PlayerAdvancementTrackerAccessor) tracker).getOwner();
         MinecraftServer server = player.getServer();
         AdvancementManager advancementManager = new AdvancementManager();
-        if (server != null) {
+        if (server != null && achievementId != null) {
             Advancement advancement = advancementManager.get(Identifier.tryParse(achievementId));
             if (advancement != null) {
                 AdvancementProgress progress = tracker.getProgress(advancement);

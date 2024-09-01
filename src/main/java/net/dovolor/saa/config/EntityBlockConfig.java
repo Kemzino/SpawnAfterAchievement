@@ -38,8 +38,10 @@ public class EntityBlockConfig {
             }
             for (EntityBlockConfig.BlockConfig config : spawnConfigs) {
                 SpawnAfterAchievement.LOGGER.info("Loaded block config: " + config.getAchievement());
-                for (String entity : config.getEntities()) {
-                    SpawnAfterAchievement.LOGGER.info("Loaded block config: " + entity);
+                if(config.getEntities() != null) {
+                    for (String entity : config.getEntities()) {
+                        SpawnAfterAchievement.LOGGER.info("Loaded block config: " + entity);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -55,7 +57,8 @@ public class EntityBlockConfig {
                         "en_us", List.of("He is one of the last who was infected"),
                         "uk_ua", List.of("Він один з останніх, хто заразився")
                 ),
-                "messagesColor", "GOLD"
+                "messagesColor", "GOLD",
+                "example", true
         );
 
         List<Map<String, Object>> defaultConfigs = List.of(defaultConfig);
@@ -82,16 +85,26 @@ public class EntityBlockConfig {
         private List<String> entities;
         private Map<String, List<String>> messages;
         private String messagesColor;
+        private Boolean example;
 
         public String getAchievement() {
+            if (example) {
+                return null;
+            }
             return achievement;
         }
 
         public List<String> getEntities() {
+            if (example) {
+                return null;
+            }
             return entities;
         }
 
         public List<String> getMessages() {
+            if (example) {
+                return null;
+            }
             MinecraftClient client = MinecraftClient.getInstance();
             LanguageManager languageManager = client.getLanguageManager();
 
@@ -104,6 +117,9 @@ public class EntityBlockConfig {
         }
 
         public String getMessagesColor() {
+            if (example) {
+                return null;
+            }
             return messagesColor;
         }
 

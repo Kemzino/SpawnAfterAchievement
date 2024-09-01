@@ -36,9 +36,11 @@ public class SpawnAfterAchievement implements ModInitializer {
 	private void onPlayerJoin(ServerPlayerEntity player) {
 		for (EntitySpawnConfig.SpawnConfig config : EntitySpawnConfig.spawnConfigs) {
 			PlayerAdvancementTracker tracker = player.getAdvancementTracker();
-			if (!AchivementManager.hasAchievement(tracker, config.getAchievement())) {
-				for (String entity : config.getEntities()) {
-					entityManager.blockEntitySpawn(entity);
+			if(config.getEntities() != null) {
+				if (!AchivementManager.hasAchievement(tracker, config.getAchievement())) {
+					for (String entity : config.getEntities()) {
+						entityManager.blockEntitySpawn(entity);
+					}
 				}
 			}
 		}
