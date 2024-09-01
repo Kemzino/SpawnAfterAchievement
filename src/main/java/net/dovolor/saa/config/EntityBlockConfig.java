@@ -88,22 +88,28 @@ public class EntityBlockConfig {
         private Boolean example;
 
         public String getAchievement() {
-            if (example) {
-                return null;
+            if(example != null) {
+                if (example) {
+                    return null;
+                }
             }
             return achievement;
         }
 
         public List<String> getEntities() {
-            if (example) {
-                return null;
+            if(example != null) {
+                if (example) {
+                    return null;
+                }
             }
             return entities;
         }
 
         public List<String> getMessages() {
-            if (example) {
-                return null;
+            if (example != null) {
+                if (example) {
+                    return null;
+                }
             }
             MinecraftClient client = MinecraftClient.getInstance();
             LanguageManager languageManager = client.getLanguageManager();
@@ -117,8 +123,10 @@ public class EntityBlockConfig {
         }
 
         public String getMessagesColor() {
-            if (example) {
-                return null;
+            if(example != null) {
+                if (example) {
+                    return null;
+                }
             }
             return messagesColor;
         }
