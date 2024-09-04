@@ -41,7 +41,7 @@ public class EntityManager {
         }
     }
 
-    private boolean isNaturalSpawn(Entity entity, NbtCompound nbt) {
+    public static boolean isNaturalSpawn(Entity entity, NbtCompound nbt) {
         entity.writeNbt(nbt);
 
         if (nbt.contains(NON_NATURAL_TAG)) {
