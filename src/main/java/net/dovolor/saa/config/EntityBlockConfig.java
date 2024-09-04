@@ -70,16 +70,6 @@ public class EntityBlockConfig {
         }
     }
 
-
-    public static List<EntityType<?>> getEntitiesForAchievement(Advancement advancement) {
-        for (EntityBlockConfig.BlockConfig config : spawnConfigs) {
-            if (config.getAchievement().equals(advancement.getId().toString())) {
-                return config.getEntityTypes();
-            }
-        }
-        return List.of();
-    }
-
     public static class BlockConfig {
         private String achievement;
         private List<String> entities;

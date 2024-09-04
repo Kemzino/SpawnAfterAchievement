@@ -54,12 +54,14 @@ public class EntityManager {
 
 
     public void blockEntitySpawn(String entityId) {
-        EntityType<?> entityType = Registries.ENTITY_TYPE.get(new Identifier(entityId));
+        SpawnAfterAchievement.LOGGER.info("block entityId: " + entityId);
+        EntityType<?> entityType = Registries.ENTITY_TYPE.get(Identifier.tryParse(entityId));
         blockedEntities.add(entityType);
     }
 
     public void allowEntitySpawn(String entityId) {
-        EntityType<?> entityType = Registries.ENTITY_TYPE.get(new Identifier(entityId));
+        SpawnAfterAchievement.LOGGER.info("allow entityId: " + entityId);
+        EntityType<?> entityType = Registries.ENTITY_TYPE.get(Identifier.tryParse(entityId));
         blockedEntities.remove(entityType);
     }
 }

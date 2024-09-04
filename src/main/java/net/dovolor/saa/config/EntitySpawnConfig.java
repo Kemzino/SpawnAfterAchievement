@@ -76,15 +76,6 @@ public class EntitySpawnConfig {
     }
 
 
-    public static List<EntityType<?>> getEntitiesForAchievement(Advancement advancement) {
-        for (SpawnConfig config : spawnConfigs) {
-            if (config.getAchievement().equals(advancement.getId().toString())) {
-                return config.getEntityTypes();
-            }
-        }
-        return List.of();
-    }
-
     public static class SpawnConfig {
         private String achievement;
         private List<String> entities;
