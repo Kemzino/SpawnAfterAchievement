@@ -3,7 +3,7 @@
 	"id": "spawn-after-achievement",
 	"version": "${version}",
 	"name": "Spawn After Achievement",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Let you configure to allow spawn entity after some achievement events",
 	"authors": [
 		"Dovorol"
 	],
