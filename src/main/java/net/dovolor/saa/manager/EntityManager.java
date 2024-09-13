@@ -16,7 +16,7 @@ public class EntityManager {
     private static final String NON_NATURAL_TAG = "NonNaturalSpawn";
     private static EntityManager instance;
 
-    private final Set<EntityType<?>> blockedEntities = new HashSet<>();
+    private static final Set<EntityType<?>> blockedEntities = new HashSet<>();
 
     private EntityManager() {
         ServerEntityEvents.ENTITY_LOAD.register(this::onEntityLoad);
@@ -43,13 +43,26 @@ public class EntityManager {
 
     public static boolean isNaturalSpawn(Entity entity, NbtCompound nbt) {
         entity.writeNbt(nbt);
-
-        if (nbt.contains(NON_NATURAL_TAG)) {
+        if (nbt.contains(NON_NATURAL_TAG) || nbt.getInt("Age") != 0) {
             return false;
         }
 
         boolean noPlayerNearby = entity.getWorld().getClosestPlayer(entity, 16) == null;
         return noPlayerNearby;
+    }
+
+    public static boolean isNaturalSpawn(EntityType<?> entityType) {
+        Identifier entityId = Registries.ENTITY_TYPE.getId(entityType);
+
+        if (entityId != null && EntityManager.isNonNatural(entityId.toString())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean isNonNatural(String entityId) {
+        return blockedEntities.contains(entityId);
     }
 
 

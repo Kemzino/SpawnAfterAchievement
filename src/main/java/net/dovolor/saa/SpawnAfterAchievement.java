@@ -31,16 +31,15 @@ public class SpawnAfterAchievement implements ModInitializer {
 		EntitySpawnConfig.loadConfig();
 		EntityBlockConfig.loadConfig();
 
-		entityManager = EntityManager.getInstance();
 
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
+			entityManager = EntityManager.getInstance();
 			loadRules(server);
 		});
 	}
 
 
 	private void loadRules(MinecraftServer server) {
-
 		for(EntitySpawnConfig.SpawnConfig config: EntitySpawnConfig.spawnConfigs) {
 			if(CustomAdvancementStorage.getAllCompletedAdvancements(server).contains(config.getAchievement())) {
 				if(config.getEntities() != null) {
@@ -51,24 +50,11 @@ public class SpawnAfterAchievement implements ModInitializer {
 			} else {
 				if (config.getEntities() != null) {
 					for (String entity : config.getEntities()) {
-						Identifier id = new Identifier(entity);
+						Identifier id = Identifier.tryParse(entity);
 						EntityType<?> entityType = Registries.ENTITY_TYPE.get(id);
 
-						if (entityType != null) {
-							ServerWorld world = server.getWorld(World.OVERWORLD);
-
-							if (world != null) {
-								Entity entityInstance = entityType.create(world);
-
-								if (entityInstance != null) {
-									NbtCompound nbt = new NbtCompound();
-									entityInstance.writeNbt(nbt);
-
-									if (EntityManager.isNaturalSpawn(entityInstance, nbt)) {
-										entityManager.blockEntitySpawn(entity);
-									}
-								}
-							}
+						if (entityType != null && EntityManager.isNaturalSpawn(entityType)) {
+							entityManager.blockEntitySpawn(entity);
 						}
 					}
 				}
@@ -79,24 +65,11 @@ public class SpawnAfterAchievement implements ModInitializer {
 			if(CustomAdvancementStorage.getAllCompletedAdvancements(server).contains(config.getAchievement())) {
 				if(config.getEntities() != null) {
 					for (String entity : config.getEntities()) {
-						Identifier id = new Identifier(entity);
+						Identifier id = Identifier.tryParse(entity);
 						EntityType<?> entityType = Registries.ENTITY_TYPE.get(id);
 
-						if (entityType != null) {
-							ServerWorld world = server.getWorld(World.OVERWORLD);
-
-							if (world != null) {
-								Entity entityInstance = entityType.create(world);
-
-								if (entityInstance != null) {
-									NbtCompound nbt = new NbtCompound();
-									entityInstance.writeNbt(nbt);
-
-									if (EntityManager.isNaturalSpawn(entityInstance, nbt)) {
-										entityManager.blockEntitySpawn(entity);
-									}
-								}
-							}
+						if (entityType != null && EntityManager.isNaturalSpawn(entityType)) {
+							entityManager.blockEntitySpawn(entity);
 						}
 					}
 				}
